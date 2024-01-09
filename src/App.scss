@@ -1,0 +1,26 @@
+@font-face {
+  font-family: Bebas;
+  src: url(./assets/fonts/BebasNeue-Regular.otf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  outline: none;
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+  color: var(--main-text-color);
+}
+#root {
+  --main-text-color: #f5f6f7;
+  --secondary-text-color: #a5a09f;
+  --main-color: #1cd4d4;
+  color: var(--main-text-color);
+  background-color: #121212;
+  font-family: Bebas;
+  font-weight: 400;
+  position: relative;
+}
