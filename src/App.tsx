@@ -14,8 +14,7 @@ import {
   View,
   Welcome,
 } from './pages';
-import { Navigation } from './components';
-import Topbar from './components/Topbar';
+import { Navigation, Topbar } from './components';
 
 function App() {
 

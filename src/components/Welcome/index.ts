@@ -1,6 +1,4 @@
-import Intro from './Intro';
-import News from './News';
-import Stream from './Stream';
-import Footer from './Footer';
-
-export { Intro, News, Stream, Footer };
+export { default as Intro } from './Intro';
+export { default as News } from './News';
+export { default as Stream } from './Stream';
+export { default as Footer } from './Footer';

@@ -1,13 +1,11 @@
-import Welcome from './Welcome';
-import Home from './Home';
-import Movies from './Movies';
-import Series from './Series';
-import MyList from './MyList';
-import News from './News';
-import Settings from './Settings';
-import Account from './Account';
-import View from './View';
-import Downloads from './Downloads';
-import Login from './Login';
-
-export { Welcome, Home, Movies, Series, MyList, News, Settings, Account, View, Downloads, Login };
+export { default as Welcome } from './Welcome'
+export { default as Home } from './Home'
+export { default as Movies } from './Movies'
+export { default as Series } from './Series'
+export { default as MyList } from './MyList'
+export { default as News } from './News'
+export { default as Settings } from './Settings'
+export { default as Account } from './Account';
+export { default as View } from './View'
+export { default as Downloads } from './Downloads'
+export { default as Login } from './Login'

@@ -1,12 +1,4 @@
 import { MovieListItemProps } from "../../interfaces";
-// interface MovieListItemProp {
-//   id: number;
-//   poster: string;
-//   movieName: string;
-//   releaseYear: number;
-//   rating: number;
-//   hrefPath: string
-// }
 
 const MovieListItem: React.FC<MovieListItemProps> = ({ ...props }) => {
   return (
