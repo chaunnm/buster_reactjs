@@ -8,6 +8,10 @@ export default {
         'secondary-text-color': '#a5a09f',
         'main-color': '#1cd4d4',
       },
+      backgroundImage: {
+        'welcome-intro': "url('/src/assets/img/intro.02414b0c.jpg')",
+        'welcome-news': "url('/src/assets/img/news.285cf24d.jpg')",
+      },
     },
   },
   plugins: [],

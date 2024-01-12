@@ -17,10 +17,11 @@ a {
 #root {
   --main-text-color: #f5f6f7;
   --secondary-text-color: #a5a09f;
+  --third-text-color: #0d141a;
   --main-color: #1cd4d4;
   color: var(--main-text-color);
   background-color: #121212;
-  font-family: Poppins, sans-serif;
+  font-family: '"Poppins", sans-serif;';
   font-weight: 400;
   position: relative;
   min-height: 100vh;
