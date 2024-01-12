@@ -1,3 +1,4 @@
-import MovieList from "./MovieList";
+import MovieList from './MovieList';
+import Navigation from './Navigation';
 
-export { MovieList };
+export { MovieList, Navigation };
