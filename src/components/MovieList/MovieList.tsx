@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieListItem from '.';
+import {MovieListItem} from '.';
 import { MovieListProps } from '../../interfaces';
 const MovieList: React.FC<MovieListProps> = ({ movieLists, title }) => {
   if (!movieLists) return null;
