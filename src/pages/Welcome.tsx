@@ -1,11 +1,7 @@
-
-
 function Welcome() {
   return (
-    <div>
-      This is Welcome Page
-    </div>
-  )
+  <div>This is Welcome Page</div>
+  );
 }
 
-export default Welcome
+export default Welcome;
