@@ -1,4 +1,2 @@
-import MovieListItem from './MovieListItem';
-import MovieList from './MovieList';
-
-export { MovieListItem, MovieList };
+export { default as MovieList } from './MovieList';
+export { default as MovieListItem } from './MovieListItem';

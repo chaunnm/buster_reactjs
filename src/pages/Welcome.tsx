@@ -1,4 +1,4 @@
-import { Intro, Stream, News, Footer } from "../components"
+import { Footer, Intro, News, Stream } from "../components";
 
 function Welcome() {
   return (

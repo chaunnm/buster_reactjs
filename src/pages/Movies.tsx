@@ -1,13 +1,5 @@
-import { MovieListItem } from '../components';
+import MovieListItem from '../components/MovieList/MovieListItem';
 import { MovieListItemProps } from '../interfaces';
-// interface MovieListItems {
-//   id: number;
-//   poster: string;
-//   movieName: string;
-//   releaseYear: number;
-//   rating: number;
-//   hrefPath: string;
-// }
 
 function Movies() {
   const a: MovieListItemProps = {
