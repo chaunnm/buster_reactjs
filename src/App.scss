@@ -9,6 +9,7 @@
   border: 0;
   outline: none;
   scroll-behavior: smooth;
+  // background-color: #121212;
 }
 a {
   text-decoration: none;
@@ -27,6 +28,7 @@ a {
   min-height: 100vh;
   .main-container {
     width: calc(100% - 96px);
-    transform:  translateX(96px) translateY(96px);
+    transform: translateX(96px) translateY(96px);
+    background-color: #121212;
   }
 }
