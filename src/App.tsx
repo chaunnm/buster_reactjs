@@ -8,7 +8,7 @@ function App() {
     <>
       <Routes>
         {publicRoute.map((route, index) => {
-          const Page = route.component;
+          const Page = route.page;
           return (
             <Route
               key={index}
@@ -18,7 +18,7 @@ function App() {
           );
         })}
         {privateRoute.map((route, index) => {
-          const Page = route.component;
+          const Page = route.page;
           return (
             <Route
               key={index}
