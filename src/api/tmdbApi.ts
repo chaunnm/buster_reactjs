@@ -49,10 +49,6 @@ const tmdbApi = {
     const url = `discover/${category[cate as keyof typeof category]}`;
     return axiosClient.get(url, params);
   },
-  getKeywords: (cate: string, id: number) => {
-    const url = `${category[cate as keyof typeof category]}/${id}/keywords`;
-    return axiosClient.get(url, { params: {} });
-  },
   search: (cate: string, params: Record<string, any>) => {
     const search = { ...category, keyword: 'keyword' };
     const url = `search/${search[cate as keyof typeof search]}`;

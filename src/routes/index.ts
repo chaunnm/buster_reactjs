@@ -1,6 +1,7 @@
 import {
   Account,
   Downloads,
+  Genre,
   Home,
   Login,
   Movies,
@@ -13,20 +14,21 @@ import {
 } from '../pages';
 
 const publicRoute = [
-  { path: '/welcome', component: Welcome },
-  { path: '/login', component: Login },
+  { path: '/welcome', page: Welcome },
+  { path: '/login', page: Login },
 ];
 
 const privateRoute = [
-  { path: '/', component: Home },
-  { path: '/movies', component: Movies },
-  { path: '/series', component: Series },
-  { path: '/my_list', component: MyList },
-  { path: '/downloads', component: Downloads },
-  { path: '/news', component: News },
-  { path: '/settings', component: Settings },
-  { path: '/account', component: Account },
-  { path: '/views', component: View },
+  { path: '/', page: Home },
+  { path: '/movies', page: Movies },
+  { path: '/series', page: Series },
+  { path: '/my_list', page: MyList },
+  { path: '/downloads', page: Downloads },
+  { path: '/news', page: News },
+  { path: '/settings', page: Settings },
+  { path: '/account', page: Account },
+  { path: '/view/:category/:id', page: View },
+  { path: '/genre/:name', page: Genre },
 ];
 
 export { publicRoute, privateRoute };

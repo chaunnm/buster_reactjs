@@ -1,9 +1,10 @@
-// import React from 'react'
+import { TestView } from "../components/TestView"
 
 function View() {
   return (
     <div>
       This is View Page
+      <TestView />
     </div>
   )
 }
