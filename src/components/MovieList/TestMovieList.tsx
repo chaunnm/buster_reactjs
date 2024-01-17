@@ -13,12 +13,12 @@ interface MovieListProps {
 }
 
 const TestMovieList: React.FC<MovieListProps> = (props) => {
-  const [list, setList] = useState<any[]>([]);
+  const [list, setList] = useState<[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       let response = null;
-      let params: Record<string, any> = {};
+      let params: Partial<Record<string, number>> = {};
 
       if (props.type !== 'similar') {
         switch (props.category) {

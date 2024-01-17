@@ -5,14 +5,41 @@ import { TestMovieList, Video } from '..';
 import { Overview } from '.';
 import { IoAdd } from 'react-icons/io5';
 
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface OverviewType {
+  episode_number?: number;
+  name?: string;
+  title?: string;
+  first_air_date?: string;
+  release_date?: string;
+  air_date?: string;
+  tagline?: string;
+  overview?: string;
+  genres?: Genre[];
+  vote_average?: number;
+  vote_count?: number;
+}
+
+interface OverviewProps {
+  title: string;
+  overview: OverviewType;
+  all: boolean;
+}
+
+export type { Genre, OverviewProps };
+
 function TestView() {
   const { category, id } = useParams();
   const [background, setBackground] = useState<string>('');
   const [src, setSrc] = useState<string>('');
   const [seasons, setSeasons] = useState<number[]>([]);
-  const [overview, setOverview] = useState<any>({});
+  const [overview, setOverview] = useState<OverviewType>({});
   const [title, setTitle] = useState<string>('');
-  const [details, setDetails] = useState<any>({});
+  const [details, setDetails] = useState<OverviewType>({});
 
   const fetchMovie = async () => {
     if (category && id) {
@@ -71,11 +98,13 @@ function TestView() {
     >
       <div className='views-top'>
         <div className='views-top-left'>
-          <Overview
-            title={title}
-            overview={overview}
-            all={false}
-          />
+          {overview && (
+            <Overview
+              title={title}
+              overview={overview}
+              all={false}
+            />
+          )}
           <button className='add-btn'>
             <IoAdd />
             <span>My Playlist</span>
@@ -103,11 +132,13 @@ function TestView() {
             </div>
           )}
           <ul className='more-content'>
-            <Overview
-              title=''
-              overview={details}
-              all={true}
-            />
+            {details && (
+              <Overview
+                title=''
+                overview={details}
+                all={true}
+              />
+            )}
             {/* <Cast /> // create Cast Component */}
           </ul>
         </div>
