@@ -1,19 +1,16 @@
 import axios, { AxiosInstance } from 'axios';
 import queryString from 'query-string';
 
-const baseUrl = 'https://api.nytimes.com/svc/';
-const apiKey = 'Gtumb6AYLNcTjYQ0nSHQ1VABIamawrR1';
-
-const axiosClient2: AxiosInstance = axios.create({
-  baseURL: baseUrl,
+const axiosClientNews: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_NEWS_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  paramsSerializer: (params) => queryString.stringify({ ...params, "api-key": apiKey }),
+  paramsSerializer: (params) => queryString.stringify({ ...params, "api-key": import.meta.env.VITE_NEWS_API_KEY }),
 });
 
 // Add a request interceptor
-axiosClient2.interceptors.request.use(
+axiosClientNews.interceptors.request.use(
   function (config) {
     return config;
   },
@@ -23,7 +20,7 @@ axiosClient2.interceptors.request.use(
 );
 
 // Add a response interceptor
-axiosClient2.interceptors.response.use(
+axiosClientNews.interceptors.response.use(
   function (response) {
     return response;
   },
@@ -35,11 +32,11 @@ axiosClient2.interceptors.response.use(
 const newsApi = {
     getMovieNews: () => {
       const url = `topstories/v2/movies.json`;
-      return axiosClient2.get(url, { params: {} });
+      return axiosClientNews.get(url, { params: {} });
     },
     getReviews: () => {
       const url = `news/v3/content/nyt/movies.json`;
-        return axiosClient2.get(url, { params: {} });
+        return axiosClientNews.get(url, { params: {} });
     }
 };
 

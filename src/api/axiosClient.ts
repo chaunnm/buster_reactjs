@@ -1,13 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import apiConfig from './apiConfig';
 import queryString from 'query-string';
 
 const axiosClient: AxiosInstance = axios.create({
-  baseURL: apiConfig.baseUrl,
+  baseURL: import.meta.env.VITE_MOVIES_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  paramsSerializer: (params) => queryString.stringify({ ...params, api_key: apiConfig.apiKey }),
+  paramsSerializer: (params) => queryString.stringify({ ...params, api_key: import.meta.env.VITE_MOVIES_API_KEY }),
 });
 
 // Add a request interceptor
