@@ -6,7 +6,8 @@ const axiosClientNews: AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  paramsSerializer: (params) => queryString.stringify({ ...params, "api-key": import.meta.env.VITE_NEWS_API_KEY }),
+  paramsSerializer: (params) =>
+    queryString.stringify({ ...params, 'api-key': import.meta.env.VITE_NEWS_API_KEY }),
 });
 
 // Add a request interceptor
@@ -30,14 +31,14 @@ axiosClientNews.interceptors.response.use(
 );
 
 const newsApi = {
-    getMovieNews: () => {
-      const url = `topstories/v2/movies.json`;
-      return axiosClientNews.get(url, { params: {} });
-    },
-    getReviews: () => {
-      const url = `news/v3/content/nyt/movies.json`;
-        return axiosClientNews.get(url, { params: {} });
-    }
+  getMovieNews: () => {
+    const url = `topstories/v2/movies.json`;
+    return axiosClientNews.get(url, { params: {} });
+  },
+  getReviews: () => {
+    const url = `news/v3/content/nyt/movies.json`;
+    return axiosClientNews.get(url, { params: {} });
+  },
 };
 
 export default newsApi;
