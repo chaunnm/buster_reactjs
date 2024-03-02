@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { apiConfig, embedMovie, embedTVEpisode, tmdbApi } from '../../api';
+import { apiConfig, tmdbApi } from '../../api';
 import { TestMovieList, Video } from '..';
 import { Overview, SeasonItem } from '.';
 import { IoAdd } from 'react-icons/io5';
 import { Tab, TabView } from './TabView';
 import EpisodeItem from './EpisodeItem';
+import { getEmbedLinkMovie, getEmbedLinkTVEpisode } from '../../utils/embed-link';
 
 interface Genre {
   id: number;
@@ -69,61 +70,61 @@ function TestView() {
   const [details, setDetails] = useState<OverviewType>({});
   const [activeTab, setActiveTab] = useState('details');
 
-  const fetchMovie = async () => {
-    if (category && id) {
-      const params = {};
-      const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
-      if (category === 'tv') {
-        setSeasons(response.data.seasons);
-        setOverview(response.data);
-      } else {
-        setOverview(response.data);
-      }
-      const backgroundTemp = response.data.backdrop_path
-        ? response.data.backdrop_path
-        : response.data.poster_path;
-      setBackground(backgroundTemp);
-
-      const titleTemp = response.data.title ? response.data.title : response.data.name;
-      document.title = `${titleTemp} - BUSTER`;
-      setTitle(titleTemp);
-    }
-  };
-
-  const handleUrl = (season: number = 1, episode: any = overview) => {
-    if (category === 'movie' && id) {
-      setSrc(embedMovie(parseInt(id, 10)));
-    } else {
-      setOverview(episode);
-      if (episode.episode_number && id) {
-        setSrc(embedTVEpisode(parseInt(id, 10), season, episode.episode_number));
-      } else if (id) {
-        setSrc(embedTVEpisode(parseInt(id, 10), season, 1));
-      }
-    }
-  };
-
-  const fetchDetails = async () => {
-    const params = {};
-    if (category && id) {
-      const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
-      setDetails(response.data);
-    }
-  };
-
-  const fetchEpisodes = async () => {
-    if (id && season) {
-      const response = await tmdbApi.getTVSeasons(parseInt(id, 10), parseInt(season, 10));
-      setEpisodes(response.data.episodes);
-    }
-  };
-
   useEffect(() => {
+    const fetchMovie = async () => {
+      if (category && id) {
+        const params = {};
+        const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
+        if (category === 'tv') {
+          setSeasons(response.data.seasons);
+          setOverview(response.data);
+        } else {
+          setOverview(response.data);
+        }
+        const backgroundTemp = response.data.backdrop_path
+          ? response.data.backdrop_path
+          : response.data.poster_path;
+        setBackground(backgroundTemp);
+
+        const titleTemp = response.data.title ? response.data.title : response.data.name;
+        document.title = `${titleTemp} - BUSTER`;
+        setTitle(titleTemp);
+      }
+    };
+
+    const handleUrl = (season: number = 1, episode: any = overview) => {
+      if (category === 'movie' && id) {
+        setSrc(getEmbedLinkMovie(parseInt(id, 10)));
+      } else {
+        setOverview(episode);
+        if (episode.episode_number && id) {
+          setSrc(getEmbedLinkTVEpisode(parseInt(id, 10), season, episode.episode_number));
+        } else if (id) {
+          setSrc(getEmbedLinkTVEpisode(parseInt(id, 10), season, 1));
+        }
+      }
+    };
+
+    const fetchDetails = async () => {
+      const params = {};
+      if (category && id) {
+        const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
+        setDetails(response.data);
+      }
+    };
+
+    const fetchEpisodes = async () => {
+      if (id && season) {
+        const response = await tmdbApi.getTVSeasons(parseInt(id, 10), parseInt(season, 10));
+        setEpisodes(response.data.episodes);
+      }
+    };
+
     fetchMovie();
     handleUrl();
     fetchDetails();
     fetchEpisodes();
-  }, [id, season]);
+  }, [category, id, season, overview]);
 
   const handleTabClick = (tab: Tab) => {
     setActiveTab(tab);
