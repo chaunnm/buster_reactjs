@@ -14,7 +14,7 @@ export const movieType = {
   upcoming: 'upcoming',
 };
 
-export const tvType = {
+export const tvType = { //TODO: type enum
   trending: 'trending',
   airing_today: 'airing_today',
   on_the_air: 'on_the_air',

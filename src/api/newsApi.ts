@@ -4,7 +4,7 @@ import queryString from 'query-string';
 const baseUrl = 'https://api.nytimes.com/svc/';
 const apiKey = 'Gtumb6AYLNcTjYQ0nSHQ1VABIamawrR1';
 
-const axiosClient2: AxiosInstance = axios.create({
+const axiosClient2: AxiosInstance = axios.create({ //TODO: Rename
   baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json',
