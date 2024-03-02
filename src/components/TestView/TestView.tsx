@@ -1,17 +1,42 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { apiConfig, embedMovie, embedTVEpisode, tmdbApi } from '../../api';
+import { apiConfig, tmdbApi } from '../../api';
 import { TestMovieList, Video } from '..';
-import { Overview } from '.';
+import { Overview, SeasonItem } from '.';
 import { IoAdd } from 'react-icons/io5';
+import { Tab, TabView } from './TabView';
+import EpisodeItem from './EpisodeItem';
+import { getEmbedLinkMovie, getEmbedLinkTVEpisode } from '../../utils/embed-link';
 
 interface Genre {
   id: number;
   name: string;
 }
 
-interface OverviewType {
+interface Season {
+  air_date?: string;
+  episode_count?: number;
+  id?: number;
+  name?: string;
+  overview?: string;
+  poster_path?: string;
+  season_number?: number;
+  vote_average?: number;
+  episodes: Episode;
+}
+
+interface Episode {
+  air_date?: string;
   episode_number?: number;
+  season_number?: number;
+  name?: string;
+  overview?: string;
+  still_path?: string;
+  vote_average?: number;
+  vote_count?: number;
+}
+
+interface OverviewType {
   name?: string;
   title?: string;
   first_air_date?: string;
@@ -20,6 +45,8 @@ interface OverviewType {
   tagline?: string;
   overview?: string;
   genres?: Genre[];
+  number_of_seasons?: number;
+  seasons?: Season;
   vote_average?: number;
   vote_count?: number;
 }
@@ -30,64 +57,78 @@ interface OverviewProps {
   all: boolean;
 }
 
-export type { Genre, OverviewProps };
+export type { Genre, Season, Episode, OverviewType, OverviewProps };
 
 function TestView() {
-  const { category, id } = useParams();
+  const { category, id, season } = useParams();
   const [background, setBackground] = useState<string>('');
   const [src, setSrc] = useState<string>('');
-  const [seasons, setSeasons] = useState<number[]>([]);
+  const [seasons, setSeasons] = useState<Season[]>();
+  const [episodes, setEpisodes] = useState<Episode[]>();
   const [overview, setOverview] = useState<OverviewType>({});
   const [title, setTitle] = useState<string>('');
   const [details, setDetails] = useState<OverviewType>({});
-
-  const fetchMovie = async () => {
-    if (category && id) {
-      const params = {};
-      const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
-      if (category === 'tv') {
-        setSeasons(response.data.seasons);
-        setOverview(response.data);
-      } else {
-        setOverview(response.data);
-      }
-      const backgroundTemp = response.data.backdrop_path
-        ? response.data.backdrop_path
-        : response.data.poster_path;
-      setBackground(backgroundTemp);
-
-      const titleTemp = response.data.title ? response.data.title : response.data.name;
-      document.title = `${titleTemp} - BUSTER`;
-      setTitle(titleTemp);
-    }
-  };
-
-  const handleUrl = (season: number = seasons[0], episode: any = overview) => {
-    if (category === 'movie' && id) {
-      setSrc(embedMovie(parseInt(id, 10)));
-    } else {
-      setOverview(episode);
-      if (episode.episode_number && id) {
-        setSrc(embedTVEpisode(parseInt(id, 10), season, episode.episode_number));
-      } else if (id) {
-        setSrc(embedTVEpisode(parseInt(id, 10), season, 1));
-      }
-    }
-  };
-
-  const fetchDetails = async () => {
-    const params = {};
-    if (category && id) {
-      const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
-      setDetails(response.data);
-    }
-  };
+  const [activeTab, setActiveTab] = useState('details');
 
   useEffect(() => {
+    const fetchMovie = async () => {
+      if (category && id) {
+        const params = {};
+        const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
+        if (category === 'tv') {
+          setSeasons(response.data.seasons);
+          setOverview(response.data);
+        } else {
+          setOverview(response.data);
+        }
+        const backgroundTemp = response.data.backdrop_path
+          ? response.data.backdrop_path
+          : response.data.poster_path;
+        setBackground(backgroundTemp);
+
+        const titleTemp = response.data.title ? response.data.title : response.data.name;
+        document.title = `${titleTemp} - BUSTER`;
+        setTitle(titleTemp);
+      }
+    };
+
+    const handleUrl = (season: number = 1, episode: any = overview) => {
+      if (category === 'movie' && id) {
+        setSrc(getEmbedLinkMovie(parseInt(id, 10)));
+      } else {
+        setOverview(episode);
+        if (episode.episode_number && id) {
+          setSrc(getEmbedLinkTVEpisode(parseInt(id, 10), season, episode.episode_number));
+        } else if (id) {
+          setSrc(getEmbedLinkTVEpisode(parseInt(id, 10), season, 1));
+        }
+      }
+    };
+
+    const fetchDetails = async () => {
+      const params = {};
+      if (category && id) {
+        const response = await tmdbApi.getDetails(category, parseInt(id, 10), { params });
+        setDetails(response.data);
+      }
+    };
+
+    const fetchEpisodes = async () => {
+      if (id && season) {
+        const response = await tmdbApi.getTVSeasons(parseInt(id, 10), parseInt(season, 10));
+        setEpisodes(response.data.episodes);
+      }
+    };
+
     fetchMovie();
     handleUrl();
     fetchDetails();
-  }, [id]);
+    fetchEpisodes();
+  }, [category, id, season, overview]);
+
+  const handleTabClick = (tab: Tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <div
@@ -96,9 +137,9 @@ function TestView() {
         backgroundImage: `url(${apiConfig.originalImage(background)})`,
       }}
     >
-      <div className='views-top'>
-        <div className='views-top-left'>
-          {overview && (
+      <div className='views-top flex flex-row'>
+        <div className='views-top-left flex-1 w-64'>
+          {overview && episodes && (
             <Overview
               title={title}
               overview={overview}
@@ -110,18 +151,68 @@ function TestView() {
             <span>My Playlist</span>
           </button>
         </div>
-        <div className='views-top-right'>
-          <Video src={src} />
+        <div className='views-top-right flex-1 w-32'>
+          {category === 'movie' && <Video src={src} />}
         </div>
       </div>
-      <div className='views-bot'>
-        <ul className='bot-more-title'>
-          <h4 className='more-title'>SIMILAR</h4>
-          <h4 className='more-title '>DETAILS</h4>
-        </ul>
-        <div className='bot-more-content'>
-          {category && id && (
-            <div className='more-content'>
+      <div
+        className='views-bot flex flex-row'
+        onClick={() => window.scroll(0, 0)}
+      >
+        {details && (
+          <TabView
+            tab='details'
+            activeTab={activeTab}
+            handleTabClick={handleTabClick}
+            children={
+              <>
+                <Overview
+                  title=''
+                  overview={details}
+                  all={true}
+                />
+                {/* <Cast /> // create Cast Component */}
+              </>
+            }
+          />
+        )}
+        {seasons && (
+          <TabView
+            tab='episodes'
+            activeTab={activeTab}
+            handleTabClick={handleTabClick}
+            children={
+              <div className='season flex'>
+                {episodes &&
+                  episodes.map((episode, index) => (
+                    <EpisodeItem
+                      key={index}
+                      episodes={episode}
+                    />
+                  ))}
+              </div>
+            }
+          />
+        )}
+        {seasons && (
+          <TabView
+            tab='seasons'
+            activeTab={activeTab}
+            handleTabClick={handleTabClick}
+            children={seasons.map((season, index) => (
+              <SeasonItem
+                key={index}
+                seasons={season}
+              />
+            ))}
+          />
+        )}
+        {category && id && (
+          <TabView
+            tab='similar'
+            activeTab={activeTab}
+            handleTabClick={handleTabClick}
+            children={
               <TestMovieList
                 category={category}
                 type='similar'
@@ -129,19 +220,9 @@ function TestView() {
                 id={parseInt(id, 10)}
                 fire={false}
               />
-            </div>
-          )}
-          <ul className='more-content'>
-            {details && (
-              <Overview
-                title=''
-                overview={details}
-                all={true}
-              />
-            )}
-            {/* <Cast /> // create Cast Component */}
-          </ul>
-        </div>
+            }
+          />
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
-import { category, movieType, tvType } from "../api/tmdbApi";
-import { TestMovieList } from "../components";
+import { category, movieType, tvType } from '../api/tmdbApi';
+import { TestMovieList } from '../components';
 
-
-function Home() {  
-
+function Home() {
   return (
     <div className='text-3xl'>
       This is HomePage
@@ -23,4 +21,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;

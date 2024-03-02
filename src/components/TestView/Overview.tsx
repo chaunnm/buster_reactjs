@@ -2,20 +2,24 @@ import { Link, useParams } from 'react-router-dom';
 import { Genre, OverviewProps } from './TestView';
 
 const Overview: React.FC<OverviewProps> = ({ title, overview, all }) => {
-  const { category } = useParams();
+  const { category, season } = useParams();
 
   return (
     <div className='overview'>
       <h1>{title}</h1>
-      {category === 'tv' && (
+      {category === 'tv' && season && (
         <h2 className='episode-name'>
-          Episode:&nbsp;{overview.name || overview.title}
+          {/* {`Episode ${episodes.episode_number}` === episodes.name
+            ? episodes.name
+            : `Episode ${episodes.episode_number}. ${episodes.name}`} */}
         </h2>
       )}
       {all && (
         <div>
           Release Date:&nbsp;
-          {overview.first_air_date || overview.release_date || overview.air_date}
+          {overview.first_air_date?.split('-').reverse().join('/') ||
+            overview.release_date?.split('-').reverse().join('/') ||
+            overview.air_date?.split('-').reverse().join('/')}
         </div>
       )}
       {!all && <p>{overview.tagline}</p>}

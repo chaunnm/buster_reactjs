@@ -22,6 +22,28 @@ export const tvType = {
   top_rated: 'top_rated',
 };
 
+// export enum Category {
+//   Movie = 'movie',
+//   TV = 'tv',
+//   All = 'all',
+// }
+
+// export enum MovieType {
+//   Trending = 'trending',
+//   NowPlaying = 'now_playing',
+//   Popular = 'popular',
+//   TopRated = 'top_rated',
+//   Upcoming = 'upcoming',
+// }
+
+// export enum TVType {
+//   Trending = 'trending',
+//   AiringToday = 'airing_today',
+//   OnTheAir = 'on_the_air',
+//   Popular = 'popular',
+//   TopRated = 'top_rated',
+// }
+
 const tmdbApi = {
   getTrendingList: (category: string, params: Record<string, any>) => {
     const url = `trending/${category}/week`;
