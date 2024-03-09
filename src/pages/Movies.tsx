@@ -1,27 +1,41 @@
-import MovieListItem from '../components/MovieList/MovieListItem';
-import { MovieListItemProps } from '../interfaces';
+import { category, movieType } from '../api/tmdbApi';
+import { MovieList } from '../components';
+import BigMovieList from '../components/MovieList/BigMovieList';
 
 function Movies() {
-  const a: MovieListItemProps = {
-    id: 848723,
-    poster: 'https://image.tmdb.org/t/p/w300/tRD18JW9iKqmwkQKvzPYDQetRoI.jpg',
-    movieName: 'Evie',
-    releaseYear: 1990,
-    rating: 8.8,
-    hrefPath: 'https://www.2embed.cc/embed/tt13540744',
-  };
-
   return (
     <div>
-      <div>This is Movies Page</div>
-      <MovieListItem
-        id={a.id}
-        poster={a.poster}
-        movieName={a.movieName}
-        releaseYear={a.releaseYear}
-        rating={a.rating}
-        hrefPath={a.hrefPath}
-      ></MovieListItem>
+      <BigMovieList
+        category={category.movie}
+        type={movieType.trending}
+        title=''
+        fire={false}
+      ></BigMovieList>
+      <MovieList
+        category={category.movie}
+        type={movieType.upcoming}
+        title='Upcoming Movies'
+        fire={false}
+      ></MovieList>
+      <MovieList
+        category={category.movie}
+        type={movieType.top_rated}
+        title='Top Rated Movies'
+        fire={false}
+      ></MovieList>
+      <MovieList
+        category={category.movie}
+        type={movieType.popular}
+        title='Popular Movies'
+        fire={false}
+      ></MovieList>
+
+      <MovieList
+        category={category.movie}
+        type={movieType.trending}
+        title='Trending Movies'
+        fire={false}
+      ></MovieList>
     </div>
   );
 }

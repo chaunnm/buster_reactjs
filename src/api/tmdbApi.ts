@@ -54,6 +54,10 @@ const tmdbApi = {
     const url = `movie/${validType}`;
     return axiosClient.get(url, params);
   },
+  getMovieByGenre: (type: string, params: Record<string, any>) => {
+    const url = `discover/${type}`;
+    return axiosClient.get(url, params);
+  },
   getTVList: (type: string, params: Record<string, any>) => {
     const validType = tvType[type as keyof typeof tvType];
     const url = `tv/${validType}`;
@@ -88,9 +92,9 @@ const tmdbApi = {
     const url = `${category[cate as keyof typeof category]}/${id}/similar`;
     return axiosClient.get(url, { params: {} });
   },
-  getGenres: (cate: string, params: Record<string, any>) => {
+  getGenres: (cate: string) => {
     const url = `genre/${category[cate as keyof typeof category]}/list`;
-    return axiosClient.get(url, params);
+    return axiosClient.get(url, { params: {} });
   },
   // TV series by seasons and episodes
   getTVSeasons: (id: number, season_number: number) => {
