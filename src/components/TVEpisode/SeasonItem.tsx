@@ -1,8 +1,8 @@
 import { IoRemoveOutline } from 'react-icons/io5';
-import { OverviewType } from './TestView';
 import { FaStar } from 'react-icons/fa';
 import { apiConfig } from '../../api';
 import { Link, useParams } from 'react-router-dom';
+import { OverviewType } from '../../interfaces';
 
 function SeasonItem({ seasons }: OverviewType) {
   const { id } = useParams();

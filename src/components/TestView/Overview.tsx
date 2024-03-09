@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { Genre, OverviewProps } from './TestView';
+import { Genre, OverviewProps } from '../../interfaces';
 
 const Overview: React.FC<OverviewProps> = ({ title, overview, all }) => {
   const { category, season } = useParams();

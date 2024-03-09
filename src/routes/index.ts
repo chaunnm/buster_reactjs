@@ -1,4 +1,3 @@
-import SeasonPage from '../components/TestView/SeasonPage';
 import {
   Account,
   Downloads,
@@ -29,7 +28,8 @@ const privateRoute = [
   { path: '/settings', page: Settings },
   { path: '/account', page: Account },
   { path: '/view/:category/:id', page: View },
-  { path: '/view/:category/:id/season/:season', page: SeasonPage },
+  { path: '/view/:category/:id/season/:season', page: View },
+  { path: '/view/:category/:id/season/:season/episode/:episode', page: View },
   { path: '/genre/:name', page: Genre },
 ];
 
