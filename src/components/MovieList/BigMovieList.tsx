@@ -2,48 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { movieType, tvType } from '../../api/tmdbApi';
 import MovieListItem from './MovieListItem';
 import { BsFire } from 'react-icons/bs';
-import { MdNavigateNext } from 'react-icons/md';
-import { GrFormPrevious } from 'react-icons/gr';
 import movieListService from '../../services/movieList';
 import { MovieListProps } from '../../interfaces';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const MovieList: React.FC<MovieListProps> = (props) => {
-  interface arrowProps {
-    onClick?: () => void;
-  }
-
-  const LeftArrow: React.FC<arrowProps> = (props) => (
-    <div
-      onClick={props.onClick}
-      className='icon leftArrow absolute -top-7 right-10 cursor-pointer rounded-xl bg-slate-400 opacity-70'
-    >
-      <GrFormPrevious />
-    </div>
-  );
-
-  const RightArrow: React.FC<arrowProps> = (props) => (
-    <div
-      onClick={props.onClick}
-      className='icon rightArrow absolute -top-7 right-5 cursor-pointer rounded-xl bg-slate-400 opacity-70'
-    >
-      <MdNavigateNext />
-    </div>
-  );
-
+const BigMovieList: React.FC<MovieListProps> = (props) => {
   const [list, setList] = useState<[]>([]);
   const settingsSlider = {
-    // dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     dots: false,
-    arrows: true,
-    nextArrow: <RightArrow />,
-    prevArrow: <LeftArrow />,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1024,
@@ -51,7 +26,7 @@ const MovieList: React.FC<MovieListProps> = (props) => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -76,16 +51,11 @@ const MovieList: React.FC<MovieListProps> = (props) => {
     const fetchData = async () => {
       try {
         let movieList = null;
-        const page = '1';
+        const page = '3';
         switch (props.type) {
           case tvType.trending:
           case movieType.trending:
             movieList = await movieListService.getTrendingList(props.category, page);
-            break;
-          case 'similar':
-            if (props.id !== undefined) {
-              movieList = await movieListService.getSimilar(props.category, props.id);
-            }
             break;
           default:
             movieList = await movieListService.getListByType(props.category, props.type);
@@ -100,12 +70,12 @@ const MovieList: React.FC<MovieListProps> = (props) => {
   }, [props.id, props.category, props.type]);
 
   return (
-    <div className='list p-5 '>
+    <div className='list p-5'>
       <span className='list-title text-lg'>
         {props.title}
         {props.fire && <BsFire />}
       </span>
-      <div className='wrapper h-[100%] relative mt-6'>
+      <div className='wrapper h-[100%] relative mt-6 ml-8'>
         <Slider {...settingsSlider}>
           {list &&
             list.map((item, i) => (
@@ -113,6 +83,7 @@ const MovieList: React.FC<MovieListProps> = (props) => {
                 key={i}
                 item={item}
                 category={props.category}
+                largerVersion={true}
               />
             ))}
         </Slider>
@@ -121,7 +92,7 @@ const MovieList: React.FC<MovieListProps> = (props) => {
   );
 };
 
-export default MovieList;
+export default BigMovieList;
 // const fetchData = async () => {
 //   let response = null;
 //   let params: Partial<Record<string, string>> = {};

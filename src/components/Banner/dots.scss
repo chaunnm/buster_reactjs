@@ -1,0 +1,11 @@
+.banner {
+  .slick-dots {
+    transform: translateY(-2rem);
+
+    li {
+      button:before {
+        color: #fff;
+      }
+    }
+  }
+}
