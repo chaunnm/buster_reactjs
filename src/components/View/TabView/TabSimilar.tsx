@@ -1,5 +1,5 @@
 import { TabViewItem } from '.';
-import { TestMovieList } from '../..';
+import { MovieList } from '../..';
 import { TabProps } from '../../../interfaces';
 
 interface TabSimilarProps extends TabProps {
@@ -16,7 +16,7 @@ const TabSimilar: React.FC<TabSimilarProps> = ({ category, id, activeTab, handle
           activeTab={activeTab}
           handleTabClick={handleTabClick}
           children={
-            <TestMovieList
+            <MovieList
               category={category}
               type='similar'
               title=''
