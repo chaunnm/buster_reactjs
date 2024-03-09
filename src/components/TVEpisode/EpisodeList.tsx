@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { tmdbApi } from '../../api';
 import { useEffect, useState } from 'react';
-import { Episode } from './TestView';
-import EpisodeItem from './EpisodeItem';
+import { Episode } from '../../interfaces';
+import { EpisodeItem } from '.';
 
-function SeasonPage() {
+function EpisodeList() {
   const { id, season } = useParams();
   const [episodes, setEpisodes] = useState<Episode[]>();
 
@@ -31,4 +31,4 @@ function SeasonPage() {
   );
 }
 
-export default SeasonPage;
+export default EpisodeList;

@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
-import { Season } from './TestView';
 import { apiConfig } from '../../api';
 import { IoRemoveOutline } from 'react-icons/io5';
 import { FaStar } from 'react-icons/fa';
+import { Season } from '../../interfaces';
 
 function EpisodeItem({ episodes }: Season) {
   const { id, season } = useParams();
@@ -40,7 +40,9 @@ function EpisodeItem({ episodes }: Season) {
             </div>
           )}
           &nbsp;
-          {episodes.air_date === null ? '' : episodes.air_date && episodes.air_date.split('-').reverse().join('/')}
+          {episodes.air_date === null
+            ? ''
+            : episodes.air_date && episodes.air_date.split('-').reverse().join('/')}
         </span>
         <p className='episode-overview line-clamp-3'>{episodes.overview}</p>
       </div>

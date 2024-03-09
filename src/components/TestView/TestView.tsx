@@ -4,60 +4,10 @@ import { apiConfig, tmdbApi } from '../../api';
 import { TestMovieList, Video } from '..';
 import { Overview, SeasonItem } from '.';
 import { IoAdd } from 'react-icons/io5';
-import { Tab, TabView } from './TabView';
-import EpisodeItem from './EpisodeItem';
+import EpisodeItem from '../TVEpisode/EpisodeItem';
 import { getEmbedLinkMovie, getEmbedLinkTVEpisode } from '../../utils/embed-link';
-
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface Season {
-  air_date?: string;
-  episode_count?: number;
-  id?: number;
-  name?: string;
-  overview?: string;
-  poster_path?: string;
-  season_number?: number;
-  vote_average?: number;
-  episodes: Episode;
-}
-
-interface Episode {
-  air_date?: string;
-  episode_number?: number;
-  season_number?: number;
-  name?: string;
-  overview?: string;
-  still_path?: string;
-  vote_average?: number;
-  vote_count?: number;
-}
-
-interface OverviewType {
-  name?: string;
-  title?: string;
-  first_air_date?: string;
-  release_date?: string;
-  air_date?: string;
-  tagline?: string;
-  overview?: string;
-  genres?: Genre[];
-  number_of_seasons?: number;
-  seasons?: Season;
-  vote_average?: number;
-  vote_count?: number;
-}
-
-interface OverviewProps {
-  title: string;
-  overview: OverviewType;
-  all: boolean;
-}
-
-export type { Genre, Season, Episode, OverviewType, OverviewProps };
+import { Tab, TabView } from '../View/TabView/TabViewItem';
+import { Episode, OverviewType, Season } from '../../interfaces';
 
 function TestView() {
   const { category, id, season } = useParams();

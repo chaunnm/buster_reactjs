@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-
-type Tab = 'episodes' | 'seasons' | 'similar' | 'details';
+import { Tab } from '../../../interfaces';
 
 interface ContentTabViewProps {
   tab: Tab;
@@ -33,7 +32,7 @@ const ContentTabView: React.FC<ContentTabViewProps> = ({ tab, activeTab, childre
   return <>{activeTab === tab && <div className={`${activeMoreContentStyle}`}>{children}</div>}</>;
 };
 
-const TabView: React.FC<TabViewProps> = ({ tab, activeTab, handleTabClick, children }) => {
+const TabViewItem: React.FC<TabViewProps> = ({ tab, activeTab, handleTabClick, children }) => {
   return (
     <div>
       <ul className='bot-more-title'>
@@ -56,4 +55,4 @@ const TabView: React.FC<TabViewProps> = ({ tab, activeTab, handleTabClick, child
   );
 };
 
-export { TitleTabView, ContentTabView, TabView };
+export { TitleTabView, ContentTabView, TabViewItem };
