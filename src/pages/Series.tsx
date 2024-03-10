@@ -5,6 +5,7 @@ import BigMovieList from '../components/MovieList/BigMovieList';
 function Series() {
   return (
     <div>
+      <h1 className='Series tittle text-center text-4xl py-5 font-bold'>Series TV</h1>
       <BigMovieList
         category={category.tv}
         type={tvType.top_rated}

@@ -11,13 +11,13 @@ function Home() {
         category={category.tv}
         type={tvType.trending}
         title='Trending TV'
-        fire={false}
+        fire={true}
       />
       <MovieList
         category={category.movie}
         type={movieType.trending}
         title='Trending Movies'
-        fire={false}
+        fire={true}
       />
       <MovieList
         category={category.movie}

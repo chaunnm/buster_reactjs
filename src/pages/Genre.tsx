@@ -12,11 +12,11 @@ function Genre() {
     className: 'center',
     centerMode: true,
     infinite: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
+    centerPadding: '2rem',
+    slidesToShow: 4,
     speed: 500,
-    rows: 2,
-    slidesPerRow: 2,
+    rows: 1,
+    slidesPerRow: 4,
   };
 
   useEffect(() => {
@@ -40,11 +40,13 @@ function Genre() {
     fetchGernes();
   }, [name]);
   return (
-    <div className='movie-by-genre'>
-      <div className='page-tittlen uppercase text-center my-9'>{name}</div>
+    <div className='movie-by-genre px-10'>
+      <div className='page-tittlen uppercase text-center my-9 font-bold text-2xl md:text-3xl'>
+        {name} Movies & TV Series
+      </div>
       <Slider
         {...settings}
-        className='w-[90%]'
+        className='w-[90%] ml-12'
       >
         {movieList &&
           movieList.map((item, i) => (

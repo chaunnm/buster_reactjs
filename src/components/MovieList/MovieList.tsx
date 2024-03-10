@@ -101,9 +101,9 @@ const MovieList: React.FC<MovieListProps> = (props) => {
 
   return (
     <div className='list p-5 '>
-      <span className='list-title text-lg'>
+      <span className='list-title text-lg flex'>
         {props.title}
-        {props.fire && <BsFire />}
+        {props.fire && <BsFire className='mt-1 ml-2 text-red-500 text-xl' />}
       </span>
       <div className='wrapper h-[100%] relative mt-6'>
         <Slider {...settingsSlider}>
