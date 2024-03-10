@@ -35,7 +35,9 @@ const MovieListItem: React.FC<MovieListItemProps> = ({ item, category, largerVer
           <img
             src={background}
             alt='movie-img'
-            className='group-hover:scale-105 transition-all duration-500 ease-in-out relative'
+            className={`group-hover:scale-105 transition-all duration-500 ease-in-out relative h-[7rem] ${
+              largerVersion ? 'w-80 h-[12rem]' : ''
+            }`}
           />
           <Link to={path}>
             <div
@@ -62,8 +64,8 @@ const MovieListItem: React.FC<MovieListItemProps> = ({ item, category, largerVer
             largerVersion ? 'absolute bottom-1 ml-5 text-xl text-white' : ''
           }`}
         >
-          <div className='item-title'>{item.title || item.name}</div>
-          <div className='details flex items-center text-[#707070]'>
+          <div className='item-title text-sm'>{item.title || item.name}</div>
+          <div className='details flex items-center text-sm text-[#707070]'>
             <div className='year flex items-center'>
               {item.release_date
                 ? item.release_date.slice(0, 4)
