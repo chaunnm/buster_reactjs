@@ -36,7 +36,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({ item, category, largerVer
             src={background}
             alt='movie-img'
             className={`group-hover:scale-105 transition-all duration-500 ease-in-out relative h-[7rem] ${
-              largerVersion ? 'w-80 h-[12rem]' : ''
+              largerVersion ? 'w-80 h-[14rem]' : ''
             }`}
           />
           <Link to={path}>
