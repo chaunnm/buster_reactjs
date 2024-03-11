@@ -23,7 +23,7 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ item }) => {
       <div className='newsArticle flex border-b-2 border-neutral-400 pb-7 my-7'>
         <img
           className='w-1/2'
-          src={item.multimedia[0].url}
+          src={item.multimedia?.[0].url}
           alt='multimedia'
         ></img>
         <div className='news-detail leading-7 ml-4 mt-4'>
