@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { apiConfig } from '../../api';
 import movieListService from '../../services/movieList';
 import { Link } from 'react-router-dom';
 import { FaPlay } from 'react-icons/fa6';
 import './dots.scss';
+import { Genre } from '../../interfaces';
 
 interface BannerItemProp {
   item: {
@@ -22,7 +24,7 @@ interface BannerItemProp {
 }
 
 export const BannerItem: React.FC<BannerItemProp> = ({ item }) => {
-  const [genres, setGenres] = useState<[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
     const fetchGernes = async () => {
@@ -76,8 +78,8 @@ export const BannerItem: React.FC<BannerItemProp> = ({ item }) => {
               {/* Handle GenresList */}{' '}
               {item.genre_ids
                 .map((id) => {
-                  const genre = genres.find((gerne) => gerne.id === id);
-                  return genre ? genre.name : id;
+                  const genre = genres.find((gerne: Genre) => gerne.id === parseInt(id, 10))?.name;
+                  return genre ? genre : id;
                 })
                 .toString()
                 .replace(/,/g, ', ')}

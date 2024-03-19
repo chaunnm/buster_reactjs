@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { tmdbApi } from '../api';
 import { MovieListProps } from '../interfaces';
 

@@ -9,6 +9,6 @@ export { default as Account } from './Account';
 export { default as View } from './View';
 export { default as Downloads } from './Downloads';
 export { default as Login } from './Login';
-export { default as Genre } from './Genre';
+export { default as Genres } from './Genre';
 export { default as Season } from './Season';
 export { default as Episode } from './Episode';

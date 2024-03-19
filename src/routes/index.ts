@@ -2,7 +2,7 @@ import {
   Account,
   Downloads,
   Episode,
-  Genre,
+  Genres,
   Home,
   Login,
   Movies,
@@ -32,7 +32,7 @@ const privateRoute = [
   { path: '/view/:category/:id', page: View },
   { path: '/view/:category/:id/season/:season', page: Episode },
   { path: '/view/:category/:id/season/:season/episode/:episode', page: Episode },
-  { path: '/genre/:name', page: Genre },
+  { path: '/genre/:name', page: Genres },
 ];
 
 export { publicRoute, privateRoute };

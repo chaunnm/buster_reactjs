@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import movieListService from '../services/movieList';
 import { MovieListItem } from '../components';
 import Slider from 'react-slick';
+import { Genre } from '../interfaces';
 
-function Genre() {
+function Genres() {
   const [TVList, setTVList] = useState<[]>([]);
   const [movieList, setMovieList] = useState<[]>([]);
   const { name } = useParams();
@@ -25,14 +27,19 @@ function Genre() {
         //Get IDGenre
         const movieGenres = await movieListService.getGenres('movie');
         const tvGenres = await movieListService.getGenres('tv');
-        const genresList = [...movieGenres.data.genres, ...tvGenres.data.genres] as [];
-        const genreID = genresList.find((genreItem) => genreItem.name === name)?.id;
+        const genresList: Genre[] = [...movieGenres.data.genres, ...tvGenres.data.genres] as [];
+        const genreID = genresList.find((genreItem: Genre) => genreItem.name === name)?.id;
 
         //Handle ID to ListGenre
-        const movieGenreList = await movieListService.getMovieByGenre('movie', genreID);
-        const TVGenreList = await movieListService.getMovieByGenre('tv', genreID);
-        setMovieList(movieGenreList.data.results);
-        setTVList(TVGenreList.data.results);
+        if (typeof genreID !== 'undefined') {
+          const movieGenreList = await movieListService.getMovieByGenre(
+            'movie',
+            genreID.toString(),
+          );
+          const TVGenreList = await movieListService.getMovieByGenre('tv', genreID.toString());
+          setMovieList(movieGenreList.data.results);
+          setTVList(TVGenreList.data.results);
+        }
       } catch (error: any) {
         console.error('Error fetching movies:', error.message);
       }
@@ -70,4 +77,4 @@ function Genre() {
   );
 }
 
-export default Genre;
+export default Genres;
