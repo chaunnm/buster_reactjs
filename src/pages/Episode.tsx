@@ -1,10 +1,22 @@
 import { useParams } from 'react-router-dom';
-import { TabDetails, TabSeasons, TabSimilar, TabViewList, TopView } from '../components/View';
+import {
+  TabDetails,
+  TabEpisodes,
+  TabSeasons,
+  TabSimilar,
+  TabViewList,
+  TopView,
+} from '../components/View';
 import { useView } from '../services';
 
-function Season() {
-  const { category, id, season } = useParams();
-  const { seasons, details, activeTab, handleTabClick } = useView(category, id, season);
+function Episode() {
+  const { category, id, season, episode } = useParams();
+  const { seasons, episodes, details, activeTab, handleTabClick } = useView(
+    category,
+    id,
+    season,
+    episode,
+  );
 
   const tabProps = { activeTab, handleTabClick };
 
@@ -14,6 +26,11 @@ function Season() {
       <TabViewList
         children={
           <>
+            <TabEpisodes
+              seasons={seasons}
+              episodes={episodes}
+              {...tabProps}
+            />
             <TabSeasons
               seasons={seasons}
               {...tabProps}
@@ -34,4 +51,4 @@ function Season() {
   );
 }
 
-export default Season;
+export default Episode;

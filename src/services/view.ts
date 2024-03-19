@@ -1,10 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import { tmdbApi } from '../api';
-import { getEmbedLinkMovie, getEmbedLinkTVEpisode } from '../utils/embed-link';
 import { Tab } from '../components/View';
 import { Episode, OverviewType, Season } from '../interfaces';
+import { getEmbedLinkMovie, getEmbedLinkTVEpisode } from '../utils';
 
-const useView = (category?: string, id?: string, season?: string) => {
+const useView = (category?: string, id?: string, season?: string, episode?: string) => {
+  const activeItem = category === 'movie' ? 'details' : season ? 'episodes' : 'seasons';
+
   const [background, setBackground] = useState<string>('');
   const [src, setSrc] = useState<string>('');
   const [seasons, setSeasons] = useState<Season[]>();
@@ -12,7 +16,7 @@ const useView = (category?: string, id?: string, season?: string) => {
   const [overview, setOverview] = useState<OverviewType>({});
   const [title, setTitle] = useState<string>('');
   const [details, setDetails] = useState<OverviewType>({});
-  const [activeTab, setActiveTab] = useState('details');
+  const [activeTab, setActiveTab] = useState(activeItem);
 
   const fetchMovie = async () => {
     if (category && id) {
@@ -49,15 +53,17 @@ const useView = (category?: string, id?: string, season?: string) => {
     setDetails(data);
   };
 
-  const handleUrl = (season: number = 1, episode: any = overview) => {
+  const handleUrl = (season: string, episode: string) => {
     if (category === 'movie' && id) {
       setSrc(getEmbedLinkMovie(parseInt(id, 10)));
     } else {
-      setOverview(episode);
-      if (episode.episode_number && id) {
-        setSrc(getEmbedLinkTVEpisode(parseInt(id, 10), season, episode.episode_number));
-      } else if (id) {
-        setSrc(getEmbedLinkTVEpisode(parseInt(id, 10), season, 1));
+      // setOverview(episode);
+      if (season && episode && id) {
+        setSrc(
+          getEmbedLinkTVEpisode(parseInt(id, 10), parseInt(season, 10), parseInt(episode, 10)),
+        );
+      } else if (season && id) {
+        setSrc(getEmbedLinkTVEpisode(parseInt(id, 10), parseInt(season, 10), 1));
       }
     }
   };
@@ -83,10 +89,10 @@ const useView = (category?: string, id?: string, season?: string) => {
 
   useEffect(() => {
     fetchMovie();
-    handleUrl();
+    handleUrl(season!, episode!);
     fetchDetails();
     fetchEpisodes();
-  }, [category, id, season]);
+  }, [category, id, season, episode]);
 
   return {
     background,

@@ -1,12 +1,14 @@
 import {
   Account,
   Downloads,
+  Episode,
   Genre,
   Home,
   Login,
   Movies,
   MyList,
   News,
+  // Season,
   Series,
   Settings,
   View,
@@ -28,8 +30,8 @@ const privateRoute = [
   { path: '/settings', page: Settings },
   { path: '/account', page: Account },
   { path: '/view/:category/:id', page: View },
-  { path: '/view/:category/:id/season/:season', page: View },
-  { path: '/view/:category/:id/season/:season/episode/:episode', page: View },
+  { path: '/view/:category/:id/season/:season', page: Episode },
+  { path: '/view/:category/:id/season/:season/episode/:episode', page: Episode },
   { path: '/genre/:name', page: Genre },
 ];
 

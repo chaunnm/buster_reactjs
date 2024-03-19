@@ -1,38 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { movieType, tvType } from '../../api/tmdbApi';
 import MovieListItem from './MovieListItem';
 import { BsFire } from 'react-icons/bs';
-import { MdNavigateNext } from 'react-icons/md';
-import { GrFormPrevious } from 'react-icons/gr';
 import movieListService from '../../services/movieList';
 import { MovieListProps } from '../../interfaces';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { LeftArrow, RightArrow } from '../../utils';
 
 const MovieList: React.FC<MovieListProps> = (props) => {
-  interface arrowProps {
-    onClick?: () => void;
-  }
-
-  const LeftArrow: React.FC<arrowProps> = (props) => (
-    <div
-      onClick={props.onClick}
-      className='icon leftArrow absolute -top-7 right-10 cursor-pointer rounded-xl bg-slate-400 opacity-70'
-    >
-      <GrFormPrevious />
-    </div>
-  );
-
-  const RightArrow: React.FC<arrowProps> = (props) => (
-    <div
-      onClick={props.onClick}
-      className='icon rightArrow absolute -top-7 right-5 cursor-pointer rounded-xl bg-slate-400 opacity-70'
-    >
-      <MdNavigateNext />
-    </div>
-  );
-
   const [list, setList] = useState<[]>([]);
   const settingsSlider = {
     // dots: false,

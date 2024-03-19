@@ -1,5 +1,4 @@
-import { FaStar } from 'react-icons/fa';
-import { FaStarHalf } from 'react-icons/fa';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import { FaRegStar } from 'react-icons/fa';
 
 interface StarProps {
@@ -14,7 +13,7 @@ const Star: React.FC<StarProps> = ({ starStatus }) => {
   return (
     <>
       {starStatus === 'full' && <FaStar />}
-      {starStatus === 'half' && <FaStarHalf />}
+      {starStatus === 'half' && <FaStarHalfAlt />}
       {starStatus === 'empty' && <FaRegStar />}
     </>
   );
@@ -22,9 +21,9 @@ const Star: React.FC<StarProps> = ({ starStatus }) => {
 
 const Rating: React.FC<RatingProps> = ({ ratingStar }) => {
   const fullStar: number = Math.floor(ratingStar);
-  console.log(fullStar);
+  // console.log(fullStar);
   return (
-    <div className='star-bar'>
+    <div className='star-bar flex text-[#d8a865] text-xl'>
       {Array.from({ length: 10 }, (_, i) => {
         let starStatus: 'full' | 'half' | 'empty';
 
