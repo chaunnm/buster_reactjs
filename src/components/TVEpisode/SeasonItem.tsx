@@ -12,7 +12,10 @@ function SeasonItem({ seasons }: OverviewType) {
   return (
     <div className='season-item'>
       {seasons && (
-        <div className='flex flex-row my-2'>
+        <div
+          className='flex flex-row my-2'
+          onClick={() => window.scroll(0, 0)}
+        >
           <Link
             to={path}
             className='season-img flex-none w-32 mr-2'

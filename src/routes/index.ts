@@ -8,11 +8,13 @@ import {
   Movies,
   MyList,
   News,
+  Search,
   // Season,
   Series,
   Settings,
   View,
   Welcome,
+  YearSelected,
 } from '../pages';
 
 const publicRoute = [
@@ -33,6 +35,8 @@ const privateRoute = [
   { path: '/view/:category/:id/season/:season', page: Episode },
   { path: '/view/:category/:id/season/:season/episode/:episode', page: Episode },
   { path: '/genre/:name', page: Genres },
+  { path: '/movies/search/:query', page: Search },
+  { path: 'year_selected/:year', page: YearSelected },
 ];
 
 export { publicRoute, privateRoute };

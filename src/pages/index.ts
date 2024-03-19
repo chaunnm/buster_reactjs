@@ -12,3 +12,5 @@ export { default as Login } from './Login';
 export { default as Genres } from './Genre';
 export { default as Season } from './Season';
 export { default as Episode } from './Episode';
+export { default as Search } from './Search';
+export { default as YearSelected } from './YearSelected';
