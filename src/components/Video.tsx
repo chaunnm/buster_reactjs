@@ -4,7 +4,7 @@ interface VideoProps {
 
 const Video = ({ src }: VideoProps) => {
   return (
-    <div className='video'>
+    <div className='video w-full h-full duration-200 rounded-sm overflow-hidden'>
       <iframe
         src={src}
         width='100%'

@@ -4,3 +4,7 @@ export { default as TabDetails } from './TabDetails';
 export { default as TabEpisodes } from './TabEpisodes';
 export { default as TabSeasons } from './TabSeasons';
 export { default as TabSimilar } from './TabSimilar';
+export { default as Details } from './Details';
+export { default as CastItem } from './CastItem';
+export { default as Cast } from './Cast';
+export { default as Rating } from './Rating';

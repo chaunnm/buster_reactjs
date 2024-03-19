@@ -28,19 +28,21 @@ function SeasonItem({ seasons }: OverviewType) {
           </Link>
           <div className='season-info flex-1 w-64'>
             <Link to={path}>
-              <h2>{seasons.name}</h2>
+              <h2 className='text-xl hover:text-main-color'>{seasons.name}</h2>
             </Link>
-            <h4 className='flex items-center'>
+            <h4 className='flex items-center content-center'>
               {seasons.vote_average === 0 ? (
                 <IoRemoveOutline />
               ) : (
                 <div className='rating flex flex-row'>
-                  <FaStar />
+                  <FaStar className='text-[#d8a865]' />
                   {seasons.vote_average && Math.round(seasons.vote_average * 10) / 10}
                 </div>
               )}
               &nbsp;
-              {seasons.air_date === null ? '' : seasons.air_date && seasons.air_date.slice(0, 4)}
+              {seasons.air_date === null
+                ? ''
+                : seasons.air_date && `• ${seasons.air_date.slice(0, 4)}`}
               &nbsp;•&nbsp;
               {seasons.episode_count} Episodes
             </h4>

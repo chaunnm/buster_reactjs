@@ -1,5 +1,4 @@
-import { TabViewItem } from '.';
-import { Overview } from '..';
+import { Cast, Details, TabViewItem } from '.';
 import { OverviewType, TabProps } from '../../../interfaces';
 
 interface TabDetailsProps extends TabProps {
@@ -16,11 +15,8 @@ const TabDetails: React.FC<TabDetailsProps> = ({ details, activeTab, handleTabCl
           handleTabClick={handleTabClick}
           children={
             <>
-              <Overview
-                title=''
-                overview={details}
-              />
-              {/* <Cast /> // create Cast Component */}
+              <Details details={details} />
+              <Cast />
             </>
           }
         />

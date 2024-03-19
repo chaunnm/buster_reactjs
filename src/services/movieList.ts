@@ -1,5 +1,4 @@
 import { tmdbApi } from '../api';
-import { category } from '../api/tmdbApi';
 import { MovieListProps } from '../interfaces';
 
 let response = null;

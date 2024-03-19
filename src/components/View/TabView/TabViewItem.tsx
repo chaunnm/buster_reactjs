@@ -34,7 +34,7 @@ const ContentTabView: React.FC<ContentTabViewProps> = ({ tab, activeTab, childre
 
 const TabViewItem: React.FC<TabViewProps> = ({ tab, activeTab, handleTabClick, children }) => {
   return (
-    <div>
+    <div className='bg-[#121212]'>
       <ul className='bot-more-title'>
         <TitleTabView
           tab={tab}
@@ -42,7 +42,7 @@ const TabViewItem: React.FC<TabViewProps> = ({ tab, activeTab, handleTabClick, c
           handleTabClick={handleTabClick}
         />
       </ul>
-      <div className='bot-more-content absolute left-0 w-full'>
+      <div className='bot-more-content bg-[#121212] absolute left-0 w-full my-2 px-4'>
         {
           <ContentTabView
             tab={tab}
