@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import ClickOutside from './ClickOutside';
+import { ClickOutside } from '..';
 
 function Profile() {
   const profileItem = [
