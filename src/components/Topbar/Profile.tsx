@@ -33,8 +33,8 @@ function Profile() {
             alt='profile_pic'
             className={`${imgProfileStyle}`}
           />
-          <span className=''>{profileItem[0].name}</span>
-          <RiArrowDropDownLine className='text-3xl' />
+          <span className='sm:hidden xl:block'>{profileItem[0].name}</span>
+          <RiArrowDropDownLine className='text-3xl sm:hidden xl:block' />
         </div>
         {profileSelected && (
           <div className='options w-72 absolute top-14 right-1.5 rounded-sm bg-[#1e1e1e]'>

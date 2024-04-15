@@ -26,7 +26,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({ item, category, largerVer
 
   return (
     (item.backdrop_path || item.poster_path) && (
-      <div className={`movie-list-item w-44 ${largerVersion ? 'w-80' : ''}`}>
+      <div className={`movie-list-item w-64 ${largerVersion ? 'w-96 h-56' : ''}`}>
         <div
           className='wrap-img
         relative group overflow-hidden 
@@ -35,8 +35,8 @@ const MovieListItem: React.FC<MovieListItemProps> = ({ item, category, largerVer
           <img
             src={background}
             alt='movie-img'
-            className={`group-hover:scale-105 transition-all duration-500 ease-in-out relative h-[7rem] ${
-              largerVersion ? 'w-80 h-[14rem]' : ''
+            className={`group-hover:scale-105 transition-all duration-500 ease-in-out relative w-64  ${
+              largerVersion ? 'w-96 h-56' : ''
             }`}
           />
           <Link to={path}>
@@ -59,13 +59,11 @@ const MovieListItem: React.FC<MovieListItemProps> = ({ item, category, largerVer
             </div>
           </Link>
         </div>
-        <div
-          className={`item-desc ${
-            largerVersion ? 'absolute bottom-1 ml-5 text-xl text-white' : ''
-          }`}
-        >
-          <div className='item-title text-sm'>{item.title || item.name}</div>
-          <div className='details flex items-center text-sm text-[#707070]'>
+        <div className={`item-desc ${largerVersion ? 'absolute bottom-5 ml-5 ' : ''}`}>
+          <div className={`item-title text-base mt-1 ${largerVersion ? 'text-3xl text-white' : ''} `}>
+            {item.title || item.name}
+          </div>
+          <div className='details flex items-center text-base mt-1 text-[#707070]'>
             <div className='year flex items-center'>
               {item.release_date
                 ? item.release_date.slice(0, 4)

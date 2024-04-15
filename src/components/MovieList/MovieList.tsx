@@ -16,15 +16,15 @@ const MovieList: React.FC<MovieListProps> = (props) => {
     // dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     dots: false,
     arrows: true,
     nextArrow: <RightArrow />,
     prevArrow: <LeftArrow />,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -33,7 +33,7 @@ const MovieList: React.FC<MovieListProps> = (props) => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 950,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -41,7 +41,7 @@ const MovieList: React.FC<MovieListProps> = (props) => {
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 640,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -78,7 +78,7 @@ const MovieList: React.FC<MovieListProps> = (props) => {
   }, [props.id, props.category, props.type]);
 
   return (
-    <div className='list p-5 '>
+    <div className='list p-5 ml-8'>
       <span className='list-title text-lg flex'>
         {props.title}
         {props.fire && <BsFire className='mt-1 ml-2 text-red-500 text-xl' />}

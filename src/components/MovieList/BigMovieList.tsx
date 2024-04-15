@@ -14,36 +14,36 @@ const BigMovieList: React.FC<MovieListProps> = (props) => {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     dots: false,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 3000,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1350,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           dots: false,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 950,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 2,
         },
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
+      // {
+      //   breakpoint: 650,
+      //   settings: {
+      //     slidesToShow: 1,
+      //     slidesToScroll: 1,
+      //   },
+      // },
     ],
   };
 
